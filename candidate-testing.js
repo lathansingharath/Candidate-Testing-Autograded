@@ -37,24 +37,34 @@ function askQuestion() {
     
   }
 
-
 }
 
 function gradeQuiz(candidateAnswers) {
 
   // TODO 1.2c: Let the candidate know if they have answered the question correctly or incorrectly // 
- 
+ let correctCounter = 0;
  for (let i = 0; i < questions.length; i++) {
   console.log(`${candidateName}, you answered ${candidateAnswers[i]}`);
   console.log(`The correct answer is ${correctAnswers[i]}`);
-
+  if(candidateAnswers[i].toLowerCase() === correctAnswers[i].toLowerCase()) {
+    correctCounter += 1;
+  }
+ 
 }
-
-
+ 
   let grade;  //TODO 3.2 use this variable to calculate the candidates score.
-
+  grade = (correctCounter / questions.length) * 100;
+  giveQuizResult(grade);
 
   return grade;
+}
+
+function giveQuizResult(grade) {
+  if (grade >= 80 ) {
+    console.log(`Congratz, ${candidateName}, you passed with an ${grade}%`);
+  } else {
+    console.log(`${candidateName}, you did not pass. You scored ${grade}%. You must have at least an 80% grade to pass`);
+  }
 }
 
 function runProgram() {
@@ -64,6 +74,10 @@ function runProgram() {
   askQuestion();
   gradeQuiz(this.candidateAnswers);
 }
+
+
+
+
 
 // ----------- Don't write any code or change any code below this line ---------- //
 module.exports = {
